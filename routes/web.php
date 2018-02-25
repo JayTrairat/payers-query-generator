@@ -17,4 +17,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'QueryGeneratorController@generateSQL')->name('generate-sql');
+Route::post('/', 'QueryGeneratorController@generateSQLWithParams')->name('generate-sql-with-params');
