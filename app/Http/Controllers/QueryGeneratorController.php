@@ -26,27 +26,27 @@ class QueryGeneratorController extends Controller
         $flag_land = $req->input('flag_land');
         $flag_two_houses = $req->input('flag_two_houses');
 
-        $result = 'USE tax; SELECT * FROM `tax_lists` LEFT JOIN `payers` on `tax_lists`.payer_id = `payers`.id WHERE 1';
+        $result = 'USE tax; SELECT * FROM `taxs` WHERE 1';
 
         if($name)
-            $result .= " AND (first_name like '%$name%' or last_name like '%$name%')";
+            $result .= " AND (name like '%$name%')";
 
         if($moo)
             $result .= " AND address_moo like '%$moo%' ";
 
         if($flag_building)
-           $result .= " AND flag_building = 1 ";
+           $result .= " AND flag_building like '/' ";
 
        if($flag_billboard)
-           $result .= " AND flag_billboard = 1 ";
+           $result .= " AND flag_billboard like '/' ";
 
        if($flag_land)
-           $result .= " AND flag_land = 1 ";
+           $result .= " AND flag_land like '/' ";
 
        if($flag_two_houses)
-           $result .= " AND flag_two_houses = 1 ";
+           $result .= " AND flag_two_houses like '/' ";
 
-        $result .= "ORDER BY `payers`.first_name  ";
+        $result .= "ORDER BY name";
         return view('query',[
             'sql' => $result,
             'name' => $name,
